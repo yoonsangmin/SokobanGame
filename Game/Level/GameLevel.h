@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include <Level/Level.h>
-#include <Math/Vector2.h>
+#include "Level/Level.h"
+#include "Math/Vector2.h"
 
 // 소코반 게임 레벨.
 class DrawableActor;
@@ -15,11 +15,18 @@ class GameLevel : public Level
 public:
     GameLevel();
 
+    // 업데이트 함수.
+    virtual void Update(float deltaTime) override;
+
     // 레벨 그리기 함수.
     virtual void Draw() override;
 
     // 플레이어가 이동이 가능한지 확인하는 함수.
     bool CanPlayerMove(const Vector2& position);
+
+private:
+    // 박스를 옮긴 뒤 게임을 클리어했는지 확인하는 함수.
+    bool CheckGameClear();
 
 private:
     // 벽/땅 액터 배열.
@@ -33,4 +40,7 @@ private:
 
     // 플레이어 액터.
     Player* player = nullptr;
+
+    // 게임 클리어 변수.
+    bool isGameClear = false;
 };
